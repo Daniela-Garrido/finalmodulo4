@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mozilla+Text:wght@200..700&display=swap');
+
+h1, h3, h4, h5 {
+  font-family: "Goldman", sans-serif;
+}
+
+h2{
+  font-family: "Goldman", sans-serif;
+  font-size: 20pxpx;
+
+}
+
+p, a, li, ul {
+  font-family: "Mozilla Text", sans-serif;
+}
+
+footer {
+  background-color: #383a3b;
+  color: #fff;
+  padding: 3rem 0;
+}
+
+.social-icons a {
+  font-size: 1.25rem;
+}
