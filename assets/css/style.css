@@ -7,11 +7,11 @@ h1, h3, h4, h5 {
 
 h2{
   font-family: "Goldman", sans-serif;
-  font-size: 20pxpx;
+  font-size: 20px;
 
 }
 
-p, a, li, ul {
+p, a, li, ul, form {
   font-family: "Mozilla Text", sans-serif;
 }
 
@@ -28,4 +28,8 @@ footer {
 .card img {
   max-height: 180px;
   object-fit: cover;
+}
+
+#formContacto {
+  background-color: rgb(216, 212, 212);
 }
