@@ -9,9 +9,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Tecno Chile</title>
-    <link rel="icon" type="image/svg+xml" href="./assets/img/linus-tech-tips-svgrepo-com.svg">
+    <link rel="icon" type="image/svg+xml" href="assets/img/angellist-svgrepo-com.svg">
 </head>
-
 <body>
   <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -27,14 +26,31 @@
           <div class="navbar-nav">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
             <a class="nav-link" href="#">Features</a>
+            <button class="btn btn-dark" id="btnCarrito">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span id="contadorCarrito">0</span>
+            </button>
+
           </div>
         </div>
       </div>
     </nav>
   </header>
 
-  <main>
+  <!-- off canvas barra lateral-->
+   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCarrito" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasRightLabel">Carrito de Compras</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul id="listCarrito""></ul>
+            <h5>Total: <span id="totalCarrito">$0.00</span></h5>
+            <button id="vaciarCarrito">Vaciar Carrito</button>
+        </div>
+    </div>
 
+  <main>
     <!-- carrusel-->
     <div id="carouselExampleCaptions" class="carousel slide">
       <div class="carousel-indicators">
@@ -74,7 +90,12 @@
       </button>
     </div>
 
+    <section class="container my-5 text-center">
+        <h2 id="bienvenida"></h2>
+    </section>
 
+      <section id="productos-contenedor" class="d-flex justify-content-evenly my-3"></section>
+    
   </main>
 
 
@@ -86,7 +107,7 @@
         <div class="col-md-4 mb-3">
           <h5>Ubicados en</h5>
           <p>Stgo, Chile.</p>
-          <img class="img-fluid" style="width: 50px;" src="assets/img/linus-tech-tips-svgrepo-com.svg" alt="">
+          <img class="img-fluid" style="width: 50px;" src="assets/img/angellist-svgrepo-com.svg" alt="">
         </div>
         <div class="col-md-4 mb-3">
           <h5>Ir a link</h5>
@@ -101,6 +122,10 @@
           <ul class="list-inline social-icons">
             <li class="list-inline-item"><a href="" class="text-white"><i
                   class="bi bi-instagram"></i></a>
+            </li>
+            <li class="list-inline-item"><a href="" class="text-white"><i class="bi bi-facebook"></i></a>
+            </li>
+            <li class="list-inline-item"><a href="" class="text-white"><i class="bi bi-linkedin"></i></a>
             </li>
           </ul>
         </div>

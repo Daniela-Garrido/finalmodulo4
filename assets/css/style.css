@@ -16,11 +16,16 @@ p, a, li, ul {
 }
 
 footer {
-  background-color: #383a3b;
+  background-color: #1d1d1d;
   color: #fff;
   padding: 3rem 0;
 }
 
 .social-icons a {
   font-size: 1.25rem;
+}
+
+.card img {
+  max-height: 180px;
+  object-fit: cover;
 }
