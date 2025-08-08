@@ -50,11 +50,11 @@ function mostrarProductos(lista, limite = null) {
         card.style.width = "20rem";
         card.innerHTML = `
         <img src="${producto.urlImagen}" class="card-img-top" alt="${producto.nombre}">
-        <div class="card-body">
+        <div class="card-body d-flex flex-column">
             <h5 class="card-title">${producto.nombre}</h5>
             <p class="card-text">${producto.descripcion}</p>
             <p class="card-text">$${producto.precio}</p>
-            <button class="btn btn-primary" onclick="agregarAlCarrito(${producto.id})">Agregar</button>
+            <button class="btn btn-primary mt-auto" onclick="agregarAlCarrito(${producto.id})">Agregar</button>
         </div>`;
         contenedor.appendChild(card);
     });
