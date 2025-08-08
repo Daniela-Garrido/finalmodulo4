@@ -10,10 +10,12 @@
   <link rel="stylesheet" href="./assets/css/style.css">
   <title>Tecno Chile</title>
   <link rel="icon" type="image/svg+xml" href="assets/img/angellist-svgrepo-com.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+
 </head>
 
 <body>
-  <header id="inicio">
+  <header id="inicio" class="fixed-top">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
@@ -24,18 +26,23 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-link active" aria-current="page" href="#">Productos</a>
-            <!-- Debe llevar a página de prodcutos-->
-            <a class="nav-link" href="#aboutUs">Sobre Nosotros</a>
-            <a class="nav-link" href="#contact">Contacto</a>
-
-            <button class="btn btn-dark" id="btnCarrito">
-              <i class="fa-solid fa-cart-shopping"></i>
-              <span id="contadorCarrito">0</span>
-            </button>
-
-          </div>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.html">Productos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#aboutUs">Sobre Nosotros</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contacto</a>
+            </li>
+            <li class="nav-item">
+              <button class="btn btn-dark" id="btnCarrito">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span id="contadorCarrito">0</span>
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
@@ -44,18 +51,18 @@
   <!-- off canvas barra lateral-->
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCarrito" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
-      <h5 id="offcanvasRightLabel">Carrito de Compras</h5>
+      <h5 class="offcanvas-title" id="offcanvasRightLabel">Carrito de Compras</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <ul id="listCarrito""></ul>
-            <h5>Total: <span id=" totalCarrito">$0.00</span></h5>
-        <button id="vaciarCarrito">Vaciar Carrito</button>
+      <ul id="listaCarrito"></ul>
+            <h5>Total: <span id="totalCarrito">$0.00</span></h5>
+        <button id="vaciarCarrito" class="btn btn-danger">Vaciar Carrito</button>
     </div>
   </div>
 
+  <!-- carrusel-->
   <main>
-    <!-- carrusel-->
     <div id="carouselExampleCaptions" class="carousel slide">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
@@ -94,25 +101,29 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
+    <!-- Fin del carrusel -->
 
+    <!-- Sección de bienvenida -->
     <section class="container my-5 text-center">
       <h2 id="bienvenida"></h2>
     </section>
-
-    <section id="productos-contenedor" class="d-flex justify-content-evenly my-3"></section>
-
-    <section id="aboutUs" class="container my-5">
-      <div class="row align-items-center g-4 gap-md-0">
-        <div class="col-md-6">
-          <h2 class="my-3">Sobre nosotros</h2>
-          <p>En Tecno Chile nos dedicamos a ofrecer soluciones tecnológicas accesibles, modernas y de calidad para
+    <!-- Fin de la sección de bienvenida -->
+    <!-- Sección de productos -->
+    <section class="d-flex my-5 col col-lg-12" id="productos-contenedor">
+    </section>
+    <!-- sección about us -->
+    <section id="aboutUs" class="container my-custom-5">
+        <div class="row align-items-center g-4 gap-md-0">
+          <div class="col-md-6">
+            <h2 class="my-3">Sobre nosotros</h2>
+            <p>En Tecno Chile nos dedicamos a ofrecer soluciones tecnológicas accesibles, modernas y de calidad para
             todos. Especializados en la venta en línea de productos como mouse, audífonos inalámbricos y otros
             accesorios, buscamos acercar la innovación digital a los hogares y oficinas de todo Chile.
-          </p>
-          <p>Nuestro compromiso es brindar una experiencia de compra eficiente y confiable, respaldada por una
+            </p>
+            <p>Nuestro compromiso es brindar una experiencia de compra eficiente y confiable, respaldada por una
             plataforma funcional y en constante mejora. Creemos en el poder de la tecnología para simplificar la vida
             cotidiana, y por eso desarrollamos soluciones que se adaptan a las necesidades reales de nuestros clientes.
-          </p>
+            </p>
           <div class="text-end my-4">
             <a href="#inicio" class="btn btn-link small ">Volver al inicio</a>
           </div>
@@ -128,7 +139,7 @@
       </p>
     </section>
 
-    <section id="contact" class="container my-5">
+    <section id="contact" class="container my-custom-5">
       <div class="row g-5 align-items-end">
         <div class="col-md-6">
           <h2 class="my-3">Contacto</h2>
