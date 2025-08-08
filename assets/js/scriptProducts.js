@@ -110,5 +110,5 @@ if (btnCarrito) {
     });
 }
 
-mostrarProductos(productos); // Asegúrate de que esta línea esté aquí para que se muestren los productos.
+mostrarProductos(productos);
 cargarCarritoDesdeLocalStorage();

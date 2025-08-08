@@ -40,10 +40,10 @@ if (bienvenida) {
 function mostrarProductos(lista, limite = null) {
     const contenedor = document.getElementById("productos-contenedor");
     contenedor.innerHTML = "";
-    
+
     // Aplicar límite si se especifica
     const productosAMostrar = limite ? lista.slice(0, limite) : lista;
-    
+
     productosAMostrar.forEach(producto => {
         const card = document.createElement("div");
         card.className = "card";
@@ -65,10 +65,18 @@ if (document.getElementById("productos-contenedor")) {
     // En index.html mostraremos solo 6 productos
     if (window.location.pathname.includes("index.html")) {
         mostrarProductos(productos, 6);
-    } 
+    }
     // En products.html mostraremos todos los productos
     else if (window.location.pathname.includes("products.html")) {
         mostrarProductos(productos);
+    }
+}
+
+function cargarCarritoDesdeLocalStorage() {
+    const carritoGuardado = localStorage.getItem("carrito");
+    if (carritoGuardado) {
+        carrito = JSON.parse(carritoGuardado);
+        actualizarCarrito();
     }
 }
 
@@ -82,35 +90,45 @@ function agregarAlCarrito(id) {
 function actualizarCarrito() {
     const listaCarrito = document.getElementById("listaCarrito");
     const totalCarrito = document.getElementById("totalCarrito");
-    listaCarrito.innerHTML = "";
-    let total = 0;
-    carrito.forEach((item, index) => {
-        total += item.precio;
-        const li = document.createElement("li");
-        li.className = "list-group-item border-bottom border-2 p-2 d-flex justify-content-between m-3 align-items-center";
-        li.innerHTML = `
-            <span>${item.nombre} - $<span>${item.precio}</span></span>
-            <button class="btn btn-danger btn-sm" onclick="eliminarDelCarrito(${index})">X</button>`;
-        listaCarrito.appendChild(li);
-    });
-    totalCarrito.innerText = total;
-    document.getElementById("contadorCarrito").innerText = carrito.length;
+    const contadorCarrito = document.getElementById("contadorCarrito");
+    if (listaCarrito && totalCarrito && contadorCarrito) {
+        listaCarrito.innerHTML = "";
+        let total = 0;
+        carrito.forEach((item, index) => {
+            total += item.precio;
+            const li = document.createElement("li");
+            li.className = "list-group-item border-bottom border-2 p-2 d-flex justify-content-between m-3 align-items-center";
+            li.innerHTML = `
+                <span>${item.nombre} - $<span>${item.precio.toLocaleString()}</span></span>
+                <button class="btn btn-danger btn-sm" onclick="eliminarDelCarrito(${index})">X</button>`;
+            listaCarrito.appendChild(li);
+        });
+        totalCarrito.innerText = `$${total.toLocaleString()}`;
+        contadorCarrito.innerText = carrito.length;
+    }
 }
 
 function eliminarDelCarrito(index) {
     carrito.splice(index, 1);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
     actualizarCarrito();
 }
 const vaciarCarritoBtn = document.getElementById("vaciarCarrito");
-vaciarCarritoBtn.addEventListener("click", () => {
-    carrito = [];
-    localStorage.removeItem("carrito");
-    actualizarCarrito();
-});
+if (vaciarCarritoBtn) {
+    vaciarCarritoBtn.addEventListener("click", () => {
+        carrito = [];
+        localStorage.removeItem("carrito");
+        actualizarCarrito();
+    });
+}
 
 
 const btnCarrito = document.getElementById("btnCarrito");
-const offcanvasCarrito = new bootstrap.Offcanvas(document.getElementById('offcanvasCarrito'));
-btnCarrito.addEventListener("click", () => {
-    offcanvasCarrito.toggle();
-});
+if (btnCarrito) {
+    const offcanvascarrito = new bootstrap.Offcanvas(document.getElementById("offcanvasCarrito"));
+    btnCarrito.addEventListener("click", () => {
+        offcanvascarrito.toggle();
+    });
+}
+mostrarProductos(productos);
+cargarCarritoDesdeLocalStorage();
