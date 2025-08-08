@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="./assets/css/style.css">
   <title>Tecno Chile</title>
   <link rel="icon" type="image/svg+xml" href="assets/img/angellist-svgrepo-com.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+
 </head>
 
 <body>
@@ -53,9 +55,9 @@
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <ul id="listCarrito""></ul>
-            <h5>Total: <span id=" totalCarrito">$0.00</span></h5>
-        <button id="vaciarCarrito">Vaciar Carrito</button>
+      <ul id="listCarrito"></ul>
+      <h5>Total: <span id="totalCarrito">$0.00</span></h5>
+      <button id="vaciarCarrito" class="btn btn-danger">Vaciar Carrito</button>
     </div>
   </div>
 
@@ -69,22 +71,19 @@
           aria-label="Slide 2"></button>
 
       </div>
-      <div class="carousel-inner" style="height:300px;"> <!-- Altura fija para el contenedor -->
+      <div class="carousel-inner" style="height:600px;"> <!-- Altura fija para el contenedor -->
         <div class="carousel-item active h-100"> <!-- h-100 para que ocupe todo el alto -->
-          <img
-            src="https://png.pngtree.com/thumb_back/fh260/background/20231225/pngtree-elegant-metallic-glitter-design-texture-a-tech-inspired-abstract-image_13882065.png"
-            class="d-block w-100 h-100 object-fit-cover" alt="...">
+          <img src="./assets/img/carousel-1.jpg" class="d-block w-100 h-100 object-fit-cover" alt="...">
           <div class="carousel-caption d-none d-md-block">
             <h4>Bienvenidos a Tecno Chile </h4>
-            <p style="font-size: 20px;">Some representative placeholder content for the first slide.</p>
+            <p style="font-size: 20px;"> Somos la tienda de tecnología número uno de Chile.</p>
           </div>
         </div>
         <div class="carousel-item h-100">
-          <img src="https://wallpapers.com/images/hd/4k-tech-40t2zerm2f3xxxnu.jpg"
-            class="d-block w-100 h-100 object-fit-cover" alt="...">
+          <img src="./assets/img/carousel-2.jpg" class="d-block w-100 h-100 object-fit-cover" alt="...">
           <div class="carousel-caption d-none d-md-block">
             <h4> Descubre sobre lo último en tecnología </h4>
-            <p style="font-size: 20px;">Some representative placeholder content for the second slide.</p>
+            <p style="font-size: 20px;">Contamos con los mejores productos del mercado y las últimas novedades.</p>
           </div>
         </div>
       </div>
@@ -99,31 +98,26 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
+    <!-- Título de la sección de productos -->
+    <div id="title-products" class="container text-center my-5">
+      <h1>Productos destacados</h1>
+      <p>Descubre nuestra amplia gama de productos tecnológicos.</p>
+    </div>
 
-    <!--
-    <section class="container my-5 text-center">
-      <h2 id="bienvenida"></h2>
-    </section>
-    -->
-
-    <!--
-    <section class="container my-4">
-      <div class="row" id="productos-contenedor"></div>
-    </section>
-     -->
-      
-
-      <!-- Sección de productos -->
-    <section class="d-flex my-5 col col-lg-12" id="productos-contenedor">
-    </section>
-
-
-    
+    <div class="container-mt-4">
+      <h2 class="text-center">Búsqueda de productos</h2>
+      <input type="text" id="filtroProductos" class="form-control container-fluid w-50" placeholder="Buscar productos...">
+    </div>
+    <!-- Sección de productos -->
+    <section class="d-flex my-5 col col-lg-12" id="productos-contenedor"></section>
 
 
 
 
-   
+
+
+
+
 
   </main>
 
