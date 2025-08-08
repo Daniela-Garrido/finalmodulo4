@@ -67,7 +67,7 @@ function agregarAlCarrito(id) {
 }
 
 function actualizarCarrito() {
-    const listaCarrito = document.getElementById("listCarrito");
+    const listaCarrito = document.getElementById("listaCarrito");
     const totalCarrito = document.getElementById("totalCarrito");
     const contadorCarrito = document.getElementById("contadorCarrito");
     if (listaCarrito && totalCarrito && contadorCarrito) {
