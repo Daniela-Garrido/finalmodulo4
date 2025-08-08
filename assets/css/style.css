@@ -7,7 +7,7 @@ h1, h3, h4, h5 {
 
 h2{
   font-family: "Goldman", sans-serif;
-  font-size: 20px;
+  font-size: 25px;
 
 }
 
@@ -41,9 +41,11 @@ p, a, li, ul, form {
   }
 }
 
-#productos-contenedor {
-  padding: 0 50px;
-  margin: 50px 0;
+#productos-contenedor{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    gap: 1rem;
+    overflow: hidden;
 }
 
 .my-custom-5 {

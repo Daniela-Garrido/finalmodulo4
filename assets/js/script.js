@@ -1,18 +1,24 @@
 
 //json
 const productos = [
-    { id: 1, nombre: "Mouse", descripcion: "Mouse inalambrico con bateria de color negro", precio: 1500, urlImagen: "./assets/img/img1.png" },
-    { id: 2, nombre: "Teclado", descripcion: "Teclado mecánico, inalambrico con luces RGB", precio: 3000, urlImagen: "./assets/img/img2.png" },
+    { id: 1, nombre: "Mouse", descripcion: "Mouse inalambrico con bateria de color negro", precio: 15000, urlImagen: "./assets/img/img1.png" },
+    { id: 2, nombre: "Teclado", descripcion: "Teclado mecánico, inalambrico con luces RGB", precio: 25000, urlImagen: "./assets/img/img2.png" },
     { id: 3, nombre: "Monitor", descripcion: "Monitor 4K 27 pulgadas", precio: 12000, urlImagen: "./assets/img/img3.png" },
-    { id: 4, nombre: "Auriculares", descripcion: "Auriculares inalambricos con cancelación de ruido", precio: 4500, urlImagen: "./assets/img/img4.png" },
-    { id: 5, nombre: "Mouse", descripcion: "Mouse inalambrico con bateria de color negro", precio: 1500, urlImagen: "./assets/img/img1.png" },
-    { id: 6, nombre: "Teclado", descripcion: "Teclado mecánico, inalambrico con luces RGB", precio: 3000, urlImagen: "./assets/img/img2.png" },
+    { id: 4, nombre: "Auriculares", descripcion: "Auriculares inalambricos con cancelación de ruido", precio: 20000, urlImagen: "./assets/img/img4.png" },
+    { id: 5, nombre: "Mouse", descripcion: "Mouse inalambrico con bateria de color negro", precio: 20000, urlImagen: "./assets/img/img1.png" },
+    { id: 6, nombre: "Teclado", descripcion: "Teclado mecánico, inalambrico con luces RGB", precio: 30000, urlImagen: "./assets/img/img2.png" },
     { id: 7, nombre: "Monitor", descripcion: "Monitor 4K 27 pulgadas", precio: 12000, urlImagen: "./assets/img/img3.png" },
-    { id: 8, nombre: "Auriculares", descripcion: "Auriculares inalambricos con cancelación de ruido", precio: 4500, urlImagen: "./assets/img/img4.png" },
+    { id: 8, nombre: "Auriculares", descripcion: "Auriculares inalambricos con cancelación de ruido", precio: 45000, urlImagen: "./assets/img/img4.png" },
+    { id: 9, nombre: "Audífonos JBL", descripcion: "Audífonos Bluetooth, color azul", precio: 70000, urlImagen: "assets/img/Audif_01_D06621.png" },
+    { id: 10, nombre: "Audífonos TWS", descripcion: "Audífono inalámbrico estéreo, color negro", precio: 50000, urlImagen: "assets/img/Audif_02_D08529.png" },
+    { id: 11, nombre: "Audífonos BWOO", descripcion: "Audífonos alámbricos, color acero", precio: 25000, urlImagen: "assets/img/Audif_03_D04355.png" },
+    { id: 12, nombre: "Teclado Klip", descripcion: "Teclado USB, color negro", precio: 15000, urlImagen: "assets/img/Tecl_01_D05411.png" },
+    { id: 13, nombre: "Teclado Xtrike", descripcion: "Teclado gaming, retroiluminado", precio: 25000, urlImagen: "assets/img/Tecl_02_D04377.png" },
+    { id: 14, nombre: "Teclado Vmax", descripcion: "Teclado Bluetooth, color negro ", precio: 35000, urlImagen: "assets/img/Tecl_03_D05751.png" },
+    { id: 15, nombre: "Mouse Logitech", descripcion: "Mouse inalámbrico, color azul", precio: 15000, urlImagen: "assets/img/Mouse_01_D01625.png" },
 ];
 
 let carrito = [];
-
 
 //se pide el nombre del usuario 
 //guardado en localStorage
@@ -30,11 +36,15 @@ if (bienvenida) {
     }
 }
 
-//card
-function mostrarProductos(lista) {
+// Modifica la función mostrarProductos para aceptar un límite
+function mostrarProductos(lista, limite = null) {
     const contenedor = document.getElementById("productos-contenedor");
     contenedor.innerHTML = "";
-    lista.forEach(producto => {
+    
+    // Aplicar límite si se especifica
+    const productosAMostrar = limite ? lista.slice(0, limite) : lista;
+    
+    productosAMostrar.forEach(producto => {
         const card = document.createElement("div");
         card.className = "card";
         card.style.width = "20rem";
@@ -50,7 +60,17 @@ function mostrarProductos(lista) {
     });
 }
 
-mostrarProductos(productos);
+// Llamada inicial - esto se ejecutará en ambas páginas
+if (document.getElementById("productos-contenedor")) {
+    // En index.html mostraremos solo 6 productos
+    if (window.location.pathname.includes("index.html")) {
+        mostrarProductos(productos, 6);
+    } 
+    // En products.html mostraremos todos los productos
+    else if (window.location.pathname.includes("products.html")) {
+        mostrarProductos(productos);
+    }
+}
 
 function agregarAlCarrito(id) {
     const producto = productos.find(p => p.id === id);
