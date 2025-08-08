@@ -21,8 +21,8 @@ p, a, li, ul, form {
     border-radius: 10px;
     transition: transform 0.2s;
 }
-.card img {
-  max-height: 180px;
+.card-img {
+  max-height: 270px;
   object-fit: cover;
 }
 #bienvenida {
@@ -42,6 +42,7 @@ p, a, li, ul, form {
   padding: 0 50px;
   margin: 50px 0;
 }
+
 .my-custom-5 {
   margin-top: 7rem;
   margin-bottom: 5rem;
@@ -65,4 +66,26 @@ footer {
 
 .social-icons a {
   font-size: 1.25rem;
+}
+
+.card {
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    
+}
+
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+#formContacto {
+  background-color: rgb(216, 212, 212);
 }
