@@ -56,10 +56,18 @@ function mostrarProductos(lista, limite = null) {
            <p class="card-text mt-auto fw-bold">
             ${producto.precio.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}
             </p>
-            <button class="btn btn-primary mt-auto" onclick="agregarAlCarrito(${producto.id})">Agregar</button>
+            <button type="button" class="btn btn-primary mt-auto" 
+            data-bs-toggle="tooltip" data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Añadir al carrito"
+            onclick="agregarAlCarrito(${producto.id})">Agregar</button>
         </div>`;
         contenedor.appendChild(card);
     });
+
+    // Selecciona e inicializa los tooltips del botón agregar//
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    const tooltipList = tooltipTriggerList.map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 }
 
 // Llamada inicial - esto se ejecutará en ambas páginas
