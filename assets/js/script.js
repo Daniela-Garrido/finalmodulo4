@@ -141,6 +141,24 @@ if (vaciarCarritoBtn) {
     });
 }
 
+function comprarCarrito() {
+    if (carrito.length > 0) {
+        alert("¡Tu compra se ha realizado con éxito! 🎉");
+
+        carrito = [];
+        localStorage.removeItem("carrito");
+
+        actualizarCarrito();
+    } else {
+        alert("Tu carrito está vacío. Agrega productos antes de comprar.");
+    }
+}
+
+const comprarCarritoBtn = document.getElementById("comprarCarrito");
+if (comprarCarritoBtn) {
+    comprarCarritoBtn.addEventListener("click", comprarCarrito);
+}
+
 const btnCarrito = document.getElementById("btnCarrito");
 if (btnCarrito) {
     const offcanvascarrito = new bootstrap.Offcanvas(document.getElementById("offcanvasCarrito"));
