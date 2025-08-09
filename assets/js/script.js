@@ -30,7 +30,7 @@ if (bienvenida) {
         bienvenida.innerHTML = `Bienvenido ${user} a nuestra tienda digital.`;
     }
     else {
-        const user = prompt("Ingrese su nombre");
+        const user = prompt("Ingrese su nombre y apellido");
         bienvenida.innerHTML = `Bienvenido ${user} a nuestra tienda digital.`;
         localStorage.setItem("user", user);
     }
@@ -53,7 +53,9 @@ function mostrarProductos(lista, limite = null) {
         <div class="card-body d-flex flex-column">
             <h5 class="card-title">${producto.nombre}</h5>
             <p class="card-text">${producto.descripcion}</p>
-            <p class="card-text">$${producto.precio}</p>
+           <p class="card-text mt-auto fw-bold">
+            ${producto.precio.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}
+            </p>
             <button class="btn btn-primary mt-auto" onclick="agregarAlCarrito(${producto.id})">Agregar</button>
         </div>`;
         contenedor.appendChild(card);
@@ -108,6 +110,17 @@ function actualizarCarrito() {
     }
 }
 
+//busqueda en pagina de productos 
+const filtroProductos = document.getElementById("filtroProductos");
+if (filtroProductos){
+    filtroProductos.addEventListener("input", (e) =>{
+        const productosFiltrados = productos.filter(producto =>{
+            return producto.nombre.toLowerCase().includes(e.target.value.toLowerCase())
+        });
+        mostrarProductos(productosFiltrados);
+    })
+}
+
 function eliminarDelCarrito(index) {
     carrito.splice(index, 1);
     localStorage.setItem("carrito", JSON.stringify(carrito));
@@ -122,7 +135,6 @@ if (vaciarCarritoBtn) {
     });
 }
 
-
 const btnCarrito = document.getElementById("btnCarrito");
 if (btnCarrito) {
     const offcanvascarrito = new bootstrap.Offcanvas(document.getElementById("offcanvasCarrito"));
@@ -130,5 +142,5 @@ if (btnCarrito) {
         offcanvascarrito.toggle();
     });
 }
-mostrarProductos(productos);
+
 cargarCarritoDesdeLocalStorage();
