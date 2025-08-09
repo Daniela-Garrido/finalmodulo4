@@ -55,7 +55,18 @@
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <ul id="listaCarrito"></ul>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="listaCarrito">
+        </tbody>
+      </table>
       <h5>Total: <span id="totalCarrito">$0.00</span></h5>
       <button id="vaciarCarrito" class="btn btn-danger">Vaciar Carrito</button>
     </div>
@@ -73,8 +84,7 @@
       </div>
       <div class="carousel-inner" style="height:400px;"> <!-- Altura fija para el contenedor -->
         <div class="carousel-item active h-100"> <!-- h-100 para que ocupe todo el alto -->
-          <img
-            src="https://cdn.pixabay.com/photo/2020/10/01/16/53/game-controller-5619105_1280.jpg"
+          <img src="https://cdn.pixabay.com/photo/2020/10/01/16/53/game-controller-5619105_1280.jpg"
             class="d-block w-100 h-100 object-fit-cover" alt="...">
           <div class="carousel-caption d-none d-md-block">
             <h4>Bienvenidos a Tecno Chile </h4>
@@ -114,7 +124,7 @@
       <h2>Productos destacados</h2>
       <p>Descubre nuestra amplia gama de productos tecnológicos.</p>
     </div>
-    
+
 
     <!-- Sección de productos -->
     <section class="container my-5">
@@ -230,11 +240,14 @@
         <div class="col-md-4 mb-3">
           <h5>Síguenos</h5>
           <ul class="list-inline social-icons">
-            <li class="list-inline-item"><a href="https://www.instagram.com/" class="text-white"><i class="bi bi-instagram"></i></a>
+            <li class="list-inline-item"><a href="https://www.instagram.com/" class="text-white"><i
+                  class="bi bi-instagram"></i></a>
             </li>
-            <li class="list-inline-item"><a href="https://www.facebook.com/" class="text-white"><i class="bi bi-facebook"></i></a>
+            <li class="list-inline-item"><a href="https://www.facebook.com/" class="text-white"><i
+                  class="bi bi-facebook"></i></a>
             </li>
-            <li class="list-inline-item"><a href="https://www.linkedin.com/" class="text-white"><i class="bi bi-linkedin"></i></a>
+            <li class="list-inline-item"><a href="https://www.linkedin.com/" class="text-white"><i
+                  class="bi bi-linkedin"></i></a>
             </li>
           </ul>
         </div>

@@ -93,19 +93,25 @@ function actualizarCarrito() {
     const listaCarrito = document.getElementById("listaCarrito");
     const totalCarrito = document.getElementById("totalCarrito");
     const contadorCarrito = document.getElementById("contadorCarrito");
+
     if (listaCarrito && totalCarrito && contadorCarrito) {
         listaCarrito.innerHTML = "";
         let total = 0;
+
         carrito.forEach((item, index) => {
             total += item.precio;
-            const li = document.createElement("li");
-            li.className = "list-group-item border-bottom border-2 p-2 d-flex justify-content-between m-3 align-items-center";
-            li.innerHTML = `
-                <span>${item.nombre} - $<span>${item.precio.toLocaleString()}</span></span>
-                <button class="btn btn-danger btn-sm" onclick="eliminarDelCarrito(${index})">X</button>`;
-            listaCarrito.appendChild(li);
+
+            const tr = document.createElement("tr");
+
+           tr.innerHTML = `
+                <td>${item.id}</td>
+                <td>${item.nombre}</td>
+                <td>${item.precio.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</td>
+                <td><button class="btn btn-danger btn-sm" onclick="eliminarDelCarrito(${index})">X</button></td>
+            `;
+            listaCarrito.appendChild(tr);
         });
-        totalCarrito.innerText = `$${total.toLocaleString()}`;
+        totalCarrito.innerText = total.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' });
         contadorCarrito.innerText = carrito.length;
     }
 }
