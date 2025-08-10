@@ -1,14 +1,14 @@
 
 //json
 const productos = [
-    { id: 1, nombre: "Mouse", descripcion: "Mouse inalambrico con bateria de color negro", precio: 15000, urlImagen: "./assets/img/img1.png" },
-    { id: 2, nombre: "Teclado", descripcion: "Teclado mecánico, inalambrico con luces RGB", precio: 25000, urlImagen: "./assets/img/img2.png" },
+    { id: 1, nombre: "Mouse", descripcion: "Mouse inalámbrico con batería de color negro", precio: 15000, urlImagen: "./assets/img/img1.png" },
+    { id: 2, nombre: "Teclado", descripcion: "Teclado mecánico, inalámbrico con luces RGB", precio: 25000, urlImagen: "./assets/img/img2.png" },
     { id: 3, nombre: "Monitor", descripcion: "Monitor 4K 27 pulgadas", precio: 12000, urlImagen: "./assets/img/img3.png" },
-    { id: 4, nombre: "Auriculares", descripcion: "Auriculares inalambricos con cancelación de ruido", precio: 20000, urlImagen: "./assets/img/img4.png" },
-    { id: 5, nombre: "Mouse", descripcion: "Mouse inalambrico con bateria de color negro", precio: 20000, urlImagen: "./assets/img/img1.png" },
-    { id: 6, nombre: "Teclado", descripcion: "Teclado mecánico, inalambrico con luces RGB", precio: 30000, urlImagen: "./assets/img/img2.png" },
+    { id: 4, nombre: "Auriculares", descripcion: "Auriculares inalámbricos con cancelación de ruido", precio: 20000, urlImagen: "./assets/img/img4.png" },
+    { id: 5, nombre: "Mouse", descripcion: "Mouse inalámbrico con batería de color negro", precio: 20000, urlImagen: "./assets/img/img1.png" },
+    { id: 6, nombre: "Teclado", descripcion: "Teclado mecánico, inalámbrico con luces RGB", precio: 30000, urlImagen: "./assets/img/img2.png" },
     { id: 7, nombre: "Monitor", descripcion: "Monitor 4K 27 pulgadas", precio: 12000, urlImagen: "./assets/img/img3.png" },
-    { id: 8, nombre: "Auriculares", descripcion: "Auriculares inalambricos con cancelación de ruido", precio: 45000, urlImagen: "./assets/img/img4.png" },
+    { id: 8, nombre: "Auriculares", descripcion: "Auriculares inalámbricos con cancelación de ruido", precio: 45000, urlImagen: "./assets/img/img4.png" },
     { id: 9, nombre: "Audífonos JBL", descripcion: "Audífonos Bluetooth, color azul", precio: 70000, urlImagen: "assets/img/Audif_01_D06621.png" },
     { id: 10, nombre: "Audífonos TWS", descripcion: "Audífono inalámbrico estéreo, color negro", precio: 50000, urlImagen: "assets/img/Audif_02_D08529.png" },
     { id: 11, nombre: "Audífonos BWOO", descripcion: "Audífonos alámbricos, color acero", precio: 25000, urlImagen: "assets/img/Audif_03_D04355.png" },
@@ -173,6 +173,37 @@ if (btnCarrito) {
     btnCarrito.addEventListener("click", () => {
         offcanvascarrito.toggle();
     });
+}
+
+function manejarFormulario(e) {
+    e.preventDefault();
+    
+    // Obtener todos los campos del formulario
+    const campos = e.target.querySelectorAll('input, textarea');
+    let camposVacios = false;
+    
+    // Verificar que todos los campos estén llenos
+    campos.forEach(campo => {
+        if (!campo.value.trim()) {
+            camposVacios = true;
+            campo.classList.add('error');
+        } else {
+            campo.classList.remove('error');
+        }
+    });
+    
+    if (camposVacios) {
+        alert('Por favor, complete todos los campos del formulario');
+    } else {
+        alert('Mensaje enviado exitosamente! 📨');
+        // Limpiar el formulario
+        e.target.reset();
+    }
+}
+
+const formContacto = document.getElementById('formContacto');
+if (formContacto) {
+    formContacto.addEventListener('submit', manejarFormulario);
 }
 
 cargarCarritoDesdeLocalStorage();

@@ -42,7 +42,7 @@ corresponda.
 3. Deberá contener un componente Navbar con links que lleven a las diferentes secciones de la web.
 ✅ El sitio contiene un navbar fijo en la parte superior con links que llevan tanto de una página a otra (index.html y products.html) como a las secciones "Sobre nosotros" y "Contacto" dentro del landing page (index.html).
 
-4. Debe tener un footer que incluya iconos de redes sociales.
+4. Debe tener un footer que incluya íconos de redes sociales.
 ✅ Ambas páginas contienen footer con links a las mismas secciones del navbar y a redes sociales. Para estas últimas se utilizaron los íconos de instagram, facebook y LinkedIn con enlaces correspondientes a las plataformas de cada una de ellas 
 
 5. Deberá solicitar al usuario nombre y apellido, los cuales deberán ser mostrarlos en alguna sección cliente.
@@ -55,11 +55,16 @@ corresponda.
 ✅ En la página de productos (products.html) se creó una estructura de datos mediante arreglos para la creación de las cards de productos. Además, se usaron las clases de Bootstrap para que estas fueran responsivas y del mismo tamaño, independiente de la cantidad de líneas que tuviera la descripción del producto
 
 8. De acuerdo a la tabla siguiente vas a realizar el arreglo de datos para mostrar en pantalla según lo solicitado.
+✅ En la página de productos (products.html) se creó una estructura de datos mediante arreglos para la creación de las cards de productos.
 
 9. Agregue un input donde se puedan filtrar los productos
+✅ En la página de productos (products.html) se agregó un input donde se pueden filtrar los productos
 
 10. Agregar un botón a cada producto para que pueda ser eliminado del carrito.
+✅ En el offcanvas del carrito se agregó un botón a cada producto para que pueda ser eliminado del carrito.
 
 11. Calcular el precio total, sumando el precio de todos los productos agregados al carrito.
+✅ En el offcanvas del carrito se calcula el precio total, sumando el precio de todos los productos agregados al carrito.
 
 12. Botón vaciar el carrito, es decir, debe permitir remover todos los productos agregados al carro dejando la sección del carrito vacío.
+✅ En el offcanvas del carrito se agregó un botón vaciar el carrito, es decir, debe permitir remover todos los productos agregados al carro dejando la sección del carrito vacío.
