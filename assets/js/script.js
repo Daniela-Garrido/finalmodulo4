@@ -1,21 +1,21 @@
 
 //json
 const productos = [
-    { id: 1, nombre: "Mouse", descripcion: "Mouse inalámbrico con batería de color negro", precio: 15000, urlImagen: "./assets/img/img1.png" },
-    { id: 2, nombre: "Teclado", descripcion: "Teclado mecánico, inalámbrico con luces RGB", precio: 25000, urlImagen: "./assets/img/img2.png" },
-    { id: 3, nombre: "Monitor", descripcion: "Monitor 4K 27 pulgadas", precio: 12000, urlImagen: "./assets/img/img3.png" },
-    { id: 4, nombre: "Auriculares", descripcion: "Auriculares inalámbricos con cancelación de ruido", precio: 20000, urlImagen: "./assets/img/img4.png" },
-    { id: 5, nombre: "Mouse", descripcion: "Mouse inalámbrico con batería de color negro", precio: 20000, urlImagen: "./assets/img/img1.png" },
-    { id: 6, nombre: "Teclado", descripcion: "Teclado mecánico, inalámbrico con luces RGB", precio: 30000, urlImagen: "./assets/img/img2.png" },
-    { id: 7, nombre: "Monitor", descripcion: "Monitor 4K 27 pulgadas", precio: 12000, urlImagen: "./assets/img/img3.png" },
-    { id: 8, nombre: "Auriculares", descripcion: "Auriculares inalámbricos con cancelación de ruido", precio: 45000, urlImagen: "./assets/img/img4.png" },
-    { id: 9, nombre: "Audífonos JBL", descripcion: "Audífonos Bluetooth, color azul", precio: 70000, urlImagen: "assets/img/Audif_01_D06621.png" },
+    { id: 1, nombre: "Mouse", descripcion: "Mouse inalámbrico con batería de color negro", precio: 14990, urlImagen: "./assets/img/M3.webp" },
+    { id: 2, nombre: "Teclado", descripcion: "Teclado mecánico, inalámbrico con luces RGB", precio: 25000, urlImagen: "./assets/img/T1.webp" },
+    { id: 3, nombre: "Monitor", descripcion: "Monitor 4K 27 pulgadas", precio: 120000, urlImagen: "./assets/img/MT1.webp" },
+    { id: 4, nombre: "Auriculares", descripcion: "Auriculares inalámbricos con cancelación de ruido", precio: 22990, urlImagen: "./assets/img/A1.webp" },
+    { id: 5, nombre: "Mouse", descripcion: "Mouse inalámbrico con batería de color negro", precio: 20990, urlImagen: "./assets/img/M1.webp" },
+    { id: 6, nombre: "Teclado", descripcion: "Teclado mecánico, inalámbrico con luces RGB", precio: 30000, urlImagen: "./assets/img/T2.webp" },
+    { id: 7, nombre: "Monitor", descripcion: "Monitor 4K 27 pulgadas", precio: 12000, urlImagen: "./assets/img/MT2.webp" },
+    { id: 8, nombre: "Auriculares", descripcion: "Auriculares inalámbricos con cancelación de ruido", precio: 45990, urlImagen: "./assets/img/A4.webp" },
+    { id: 9, nombre: "Audífonos JBL", descripcion: "Audífonos Bluetooth, color azul", precio: 18990, urlImagen: "assets/img/Audif_01_D06621.png" },
     { id: 10, nombre: "Audífonos TWS", descripcion: "Audífono inalámbrico estéreo, color negro", precio: 50000, urlImagen: "assets/img/Audif_02_D08529.png" },
     { id: 11, nombre: "Audífonos BWOO", descripcion: "Audífonos alámbricos, color acero", precio: 25000, urlImagen: "assets/img/Audif_03_D04355.png" },
     { id: 12, nombre: "Teclado Klip", descripcion: "Teclado USB, color negro", precio: 15000, urlImagen: "assets/img/Tecl_01_D05411.png" },
     { id: 13, nombre: "Teclado Xtrike", descripcion: "Teclado gaming, retroiluminado", precio: 25000, urlImagen: "assets/img/Tecl_02_D04377.png" },
     { id: 14, nombre: "Teclado Vmax", descripcion: "Teclado Bluetooth, color negro ", precio: 35000, urlImagen: "assets/img/Tecl_03_D05751.png" },
-    { id: 15, nombre: "Mouse Logitech", descripcion: "Mouse inalámbrico, color azul", precio: 15000, urlImagen: "assets/img/Mouse_01_D01625.png" },
+    { id: 15, nombre: "Mouse Logitech", descripcion: "Mouse inalámbrico, color azul", precio: 15000, urlImagen: "./assets/img/M4.webp" },
 ];
 
 let carrito = [];
@@ -111,7 +111,7 @@ function actualizarCarrito() {
 
             const tr = document.createElement("tr");
 
-           tr.innerHTML = `
+            tr.innerHTML = `
                 <td>${item.id}</td>
                 <td>${item.nombre}</td>
                 <td>${item.precio.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</td>
@@ -126,9 +126,9 @@ function actualizarCarrito() {
 
 //busqueda en pagina de productos 
 const filtroProductos = document.getElementById("filtroProductos");
-if (filtroProductos){
-    filtroProductos.addEventListener("input", (e) =>{
-        const productosFiltrados = productos.filter(producto =>{
+if (filtroProductos) {
+    filtroProductos.addEventListener("input", (e) => {
+        const productosFiltrados = productos.filter(producto => {
             return producto.nombre.toLowerCase().includes(e.target.value.toLowerCase())
         });
         mostrarProductos(productosFiltrados);
@@ -177,11 +177,11 @@ if (btnCarrito) {
 
 function manejarFormulario(e) {
     e.preventDefault();
-    
+
     // Obtener todos los campos del formulario
     const campos = e.target.querySelectorAll('input, textarea');
     let camposVacios = false;
-    
+
     // Verificar que todos los campos estén llenos
     campos.forEach(campo => {
         if (!campo.value.trim()) {
@@ -191,7 +191,7 @@ function manejarFormulario(e) {
             campo.classList.remove('error');
         }
     });
-    
+
     if (camposVacios) {
         alert('Por favor, complete todos los campos del formulario');
     } else {
@@ -207,3 +207,17 @@ if (formContacto) {
 }
 
 cargarCarritoDesdeLocalStorage();
+
+
+//animacion img quienes somos
+document.addEventListener('DOMContentLoaded', function () {
+    const image = document.querySelector('.hover-animate');
+
+    image.addEventListener('mouseenter', function () {
+        this.classList.add('animate__animated', 'animate__pulse');
+    });
+
+    image.addEventListener('animationend', function () {
+        this.classList.remove('animate__animated', 'animate__pulse');
+    });
+});
