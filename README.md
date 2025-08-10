@@ -1,35 +1,81 @@
-# TECNO CHILE
+# TECNO CHILE - E-commerce Prototype
 
-##Integrantes:
+## Descripción del Proyecto
+Prototipo funcional de tienda en línea para "Tecno Chile", desarrollado como evaluación final del Módulo 4: Fundamentos de Programación en Javascript. El sitio incluye landing page responsivo y página de productos con funcionalidad completa de carrito de compras.
 
--María Teresa de la Fuente
--Daniela Garrido Olivares
--Roberto Escobar Vivallo
--Gonzalo Román Reyes
+## Integrantes del Equipo
+- María Teresa de la Fuente
+- Daniela Garrido Olivares
+- Roberto Escobar Vivallo
+- Gonzalo Román Reyes
 
+## Repositorio
+🔗 [https://github.com/Daniela-Garrido/finalmodulo4.git](https://github.com/Daniela-Garrido/finalmodulo4.git)
 
-## Ruta de repositorio: https://github.com/Daniela-Garrido/finalmodulo4.git
+## Tecnologías Utilizadas
+- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+- **Frameworks/Librerías**: 
+  - Bootstrap 5 (para diseño responsivo y componentes UI)
+  - Animate.css (para animaciones)
+  - Font Awesome (para íconos)
+- **Almacenamiento**: LocalStorage (para persistencia de datos del usuario)
 
-## Evaluación Final - Módulo 4: Fundamentos de Programación en Javascript
+## Estructura del Proyecto
+```bash
+finalmodulo4/
+├── assets/
+│ ├── css/ # Estilos personalizados
+│ ├── img/ # Imágenes del proyecto
+│ └── js/ # Scripts JavaScript
+├── index.html # Landing page principal
+├── products.html # Página de productos
+└── README.md # Documentación
+```
+## Funcionalidades Implementadas
 
-###  Objetivo
-Codificar piezas de software de baja/mediana complejidad
-utilizando lenguaje Javascript para resolver problemáticas comunes
-de acuerdo a las necesidades de la industria.
+### ✅ Navegación y Estructura
+- Navbar responsive con enlaces a todas las secciones
+- Footer con íconos de redes sociales y enlaces importantes
+- Diseño completamente responsivo (mobile-first)
 
-### Actividad
-La empresa “Tecno Chile” es una empresa en la cual necesitan
-vender sus productos en línea, para lo cual se hace necesario diseñar
-un prototipo funcional que permita establecer una primera solución.
-Dados los antecedentes anteriores, es necesario desarrollar una
-solución tecnológica que cubra los procesos de negocio descritos
-anteriormente.
-Para el desarrollo web, y en esta ocasión, tu trabajo será resolver,
-con los conocimientos que has adquirido, una serie de cálculos
-matemáticos que se necesitan diagramar y/o programar según
-corresponda.
+### ✅ Landing Page (index.html)
+- Sección hero con carrusel de imágenes
+- Sección "Productos Destacados" con cards interactivas
+- Sección "Sobre Nosotros" con información de la empresa
+- Área de contacto con formulario y mapa integrado
 
----
+### ✅ Página de Productos (products.html)
+- Sistema de cards de productos generadas dinámicamente con JavaScript
+- Filtrado de productos mediante input de búsqueda
+- Carrito de compras funcional con panel deslizante (offcanvas)
+
+### ✅ Carrito de Compras
+- Agregar/eliminar productos individualmente
+- Cálculo automático del total
+- Botón "Vaciar Carrito" que remueve todos los items
+- Persistencia de datos usando localStorage
+
+### ✅ Interacción con el Usuario
+- Solicitud de nombre/apellido al ingresar al sitio
+- Mensaje personalizado de bienvenida
+- Tooltips en botones importantes
+- Animaciones en elementos interactivos
+
+## Requisitos Cumplidos
+| #  | Requerimiento | Estado |
+|----|---------------|--------|
+| 1  | Prototipo responsivo | ✅ |
+| 2  | Implementación Bootstrap (carousel, tooltips) | ✅ |
+| 3  | Navbar funcional | ✅ |
+| 4  | Footer con redes sociales | ✅ |
+| 5  | Captura y muestra nombre usuario | ✅ |
+| 6  | Página de ventas con cards y carrito | ✅ |
+| 7  | Estructura de datos con arreglos | ✅ |
+| 8  | Arreglo de datos según tabla | ✅ |
+| 9  | Filtrado de productos | ✅ |
+| 10 | Eliminar productos individualmente | ✅ |
+| 11 | Cálculo de precio total | ✅ |
+| 12 | Vaciar carrito completamente | ✅ | 
 
 ## Requerimientos
 
