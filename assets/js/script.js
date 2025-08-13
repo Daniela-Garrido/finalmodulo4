@@ -1,89 +1,98 @@
+// Variable global para los productos
+var productos = [];
 
-//json
-const productos = [
-    { id: 1, nombre: "Mouse", descripcion: "Mouse inalámbrico con batería de color negro", precio: 14990, urlImagen: "./assets/img/M3.webp" },
-    { id: 2, nombre: "Teclado", descripcion: "Teclado mecánico, inalámbrico con luces RGB", precio: 25000, urlImagen: "./assets/img/T1.webp" },
-    { id: 3, nombre: "Monitor", descripcion: "Monitor 4K 27 pulgadas", precio: 120000, urlImagen: "./assets/img/MT1.webp" },
-    { id: 4, nombre: "Auriculares", descripcion: "Auriculares inalámbricos con cancelación de ruido", precio: 22990, urlImagen: "./assets/img/A1.webp" },
-    { id: 5, nombre: "Mouse", descripcion: "Mouse inalámbrico con batería de color negro", precio: 20990, urlImagen: "./assets/img/M1.webp" },
-    { id: 6, nombre: "Teclado", descripcion: "Teclado mecánico, inalámbrico con luces RGB", precio: 30000, urlImagen: "./assets/img/T2.webp" },
-    { id: 7, nombre: "Monitor", descripcion: "Monitor 4K 27 pulgadas", precio: 12000, urlImagen: "./assets/img/MT2.webp" },
-    { id: 8, nombre: "Auriculares", descripcion: "Auriculares inalámbricos con cancelación de ruido", precio: 45990, urlImagen: "./assets/img/A4.webp" },
-    { id: 9, nombre: "Audífonos JBL", descripcion: "Audífonos Bluetooth, color azul", precio: 18990, urlImagen: "assets/img/Audif_01_D06621.png" },
-    { id: 10, nombre: "Audífonos TWS", descripcion: "Audífono inalámbrico estéreo, color negro", precio: 50000, urlImagen: "assets/img/Audif_02_D08529.png" },
-    { id: 11, nombre: "Audífonos BWOO", descripcion: "Audífonos alámbricos, color acero", precio: 25000, urlImagen: "assets/img/Audif_03_D04355.png" },
-    { id: 12, nombre: "Teclado Klip", descripcion: "Teclado USB, color negro", precio: 15000, urlImagen: "assets/img/Tecl_01_D05411.png" },
-    { id: 13, nombre: "Teclado Xtrike", descripcion: "Teclado gaming, retroiluminado", precio: 25000, urlImagen: "assets/img/Tecl_02_D04377.png" },
-    { id: 14, nombre: "Teclado Vmax", descripcion: "Teclado Bluetooth, color negro ", precio: 35000, urlImagen: "assets/img/Tecl_03_D05751.png" },
-    { id: 15, nombre: "Mouse Logitech", descripcion: "Mouse inalámbrico, color azul", precio: 15000, urlImagen: "./assets/img/M4.webp" },
-];
+// Cargar productos desde el JSON
+function cargarProductos() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', './productos.json', true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                try {
+                    var data = JSON.parse(xhr.responseText);
+                    productos = data.productos;
+                    mostrarProductosSegunPagina();
+                } catch (e) {
+                    console.error('Error parsing JSON!', e);
+                }
+            } else {
+                console.error('Error loading products!');
+            }
+        }
+    };
+    xhr.send();
+}
 
-let carrito = [];
-
-//se pide el nombre del usuario 
-//guardado en localStorage
-
-const bienvenida = document.getElementById("bienvenida");
-if (bienvenida) {
-    if (localStorage.getItem("user")) {
-        const user = localStorage.getItem("user");
-        bienvenida.innerHTML = `Bienvenido ${user} a nuestra tienda digital.`;
-    }
-    else {
-        const user = prompt("Ingrese su nombre y apellido");
-        bienvenida.innerHTML = `Bienvenido ${user} a nuestra tienda digital.`;
-        localStorage.setItem("user", user);
+// Mostrar productos según la página
+function mostrarProductosSegunPagina() {
+    var contenedor = document.getElementById("productos-contenedor");
+    if (contenedor) {
+        if (window.location.pathname.includes("index.html")) {
+            mostrarProductos(productos.slice(0, 6));
+        } else if (window.location.pathname.includes("products.html")) {
+            mostrarProductos(productos);
+        }
     }
 }
 
-// Modifica la función mostrarProductos para aceptar un límite
-function mostrarProductos(lista, limite = null) {
-    const contenedor = document.getElementById("productos-contenedor");
+// Función para mostrar productos
+function mostrarProductos(listaProductos) {
+    var contenedor = document.getElementById("productos-contenedor");
     contenedor.innerHTML = "";
 
-    // Aplicar límite si se especifica
-    const productosAMostrar = limite ? lista.slice(0, limite) : lista;
-
-    productosAMostrar.forEach(producto => {
-        const card = document.createElement("div");
+    listaProductos.forEach(function(producto) {
+        var card = document.createElement("div");
         card.className = "card";
         card.style.width = "20rem";
+        
+        // Control de stock
+        var botonAgregar = '';
+        var mensajeStock = '';
+        
+        if (producto.stock <= 0) {
+            mensajeStock = '<p class="text-danger">Agotado</p>';
+        } else if (producto.stock === 1) {
+            mensajeStock = '<p class="text-warning">¡Última unidad!</p>';
+        } else if (producto.stock < 4) {
+            mensajeStock = '<p class="text-warning">Solo quedan ' + producto.stock + ' unidades</p>';
+        }
+        
+        if (producto.stock > 0) {
+            botonAgregar = '<button type="button" class="btn btn-primary mt-auto" ' +
+                'data-bs-toggle="tooltip" data-bs-placement="top" ' +
+                'data-bs-custom-class="custom-tooltip" ' +
+                'data-bs-title="Añadir al carrito" ' +
+                'onclick="agregarAlCarrito(' + producto.id + ')">Agregar</button>';
+        } else {
+            botonAgregar = '<button type="button" class="btn btn-secondary mt-auto" disabled>Agotado</button>';
+        }
+
         card.innerHTML = `
-        <img src="${producto.urlImagen}" class="card-img-top" alt="${producto.nombre}">
-        <div class="card-body d-flex flex-column">
-            <h5 class="card-title">${producto.nombre}</h5>
-            <p class="card-text">${producto.descripcion}</p>
-           <p class="card-text mt-auto fw-bold">
-            ${producto.precio.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}
-            </p>
-            <button type="button" class="btn btn-primary mt-auto" 
-            data-bs-toggle="tooltip" data-bs-placement="top"
-            data-bs-custom-class="custom-tooltip"
-            data-bs-title="Añadir al carrito"
-            onclick="agregarAlCarrito(${producto.id})">Agregar</button>
-        </div>`;
+            <img src="${producto.urlImagen}" class="card-img-top" alt="${producto.nombre}">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">${producto.nombre}</h5>
+                <p class="card-text">${producto.descripcion}</p>
+                ${mensajeStock}
+                <p class="card-text mt-auto fw-bold">
+                    ${producto.precio.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}
+                </p>
+                ${botonAgregar}
+            </div>`;
         contenedor.appendChild(card);
     });
 
-    // Selecciona e inicializa los tooltips del botón agregar//
-    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    const tooltipList = tooltipTriggerList.map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+    // Inicializar tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.forEach(function(tooltipTriggerEl) {
+        new bootstrap.Tooltip(tooltipTriggerEl);
+    });
 }
 
-// Llamada inicial - esto se ejecutará en ambas páginas
-if (document.getElementById("productos-contenedor")) {
-    // En index.html mostraremos solo 6 productos
-    if (window.location.pathname.includes("index.html")) {
-        mostrarProductos(productos, 6);
-    }
-    // En products.html mostraremos todos los productos
-    else if (window.location.pathname.includes("products.html")) {
-        mostrarProductos(productos);
-    }
-}
+// Carrito de compras
+var carrito = [];
 
 function cargarCarritoDesdeLocalStorage() {
-    const carritoGuardado = localStorage.getItem("carrito");
+    var carritoGuardado = localStorage.getItem("carrito");
     if (carritoGuardado) {
         carrito = JSON.parse(carritoGuardado);
         actualizarCarrito();
@@ -91,48 +100,90 @@ function cargarCarritoDesdeLocalStorage() {
 }
 
 function agregarAlCarrito(id) {
-    const producto = productos.find(p => p.id === id);
-    carrito.push(producto);
+    var producto = productos.find(function(p) { return p.id === id; });
+    
+    if (producto.stock <= 0) {
+        alert('Este producto está agotado');
+        return;
+    }
+    
+    // Verificar si el producto ya está en el carrito
+    var itemExistente = carrito.find(function(item) { return item.id === id; });
+    
+    if (itemExistente) {
+        if (itemExistente.cantidad >= producto.stock) {
+            alert('No hay suficiente stock disponible');
+            return;
+        }
+        itemExistente.cantidad += 1;
+    } else {
+        carrito.push({
+            id: producto.id,
+            nombre: producto.nombre,
+            precio: producto.precio,
+            cantidad: 1,
+            stockDisponible: producto.stock
+        });
+    }
+    
     localStorage.setItem("carrito", JSON.stringify(carrito));
     actualizarCarrito();
 }
 
 function actualizarCarrito() {
-    const listaCarrito = document.getElementById("listaCarrito");
-    const totalCarrito = document.getElementById("totalCarrito");
-    const contadorCarrito = document.getElementById("contadorCarrito");
+    var listaCarrito = document.getElementById("listaCarrito");
+    var totalCarrito = document.getElementById("totalCarrito");
+    var contadorCarrito = document.getElementById("contadorCarrito");
 
     if (listaCarrito && totalCarrito && contadorCarrito) {
         listaCarrito.innerHTML = "";
-        let total = 0;
+        var total = 0;
+        var cantidadTotal = 0;
 
-        carrito.forEach((item, index) => {
-            total += item.precio;
+        carrito.forEach(function(item, index) {
+            var subtotal = item.precio * item.cantidad;
+            total += subtotal;
+            cantidadTotal += item.cantidad;
 
-            const tr = document.createElement("tr");
-
+            var tr = document.createElement("tr");
             tr.innerHTML = `
                 <td>${item.id}</td>
-                <td>${item.nombre}</td>
-                <td>${item.precio.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</td>
-                <td><button class="btn btn-danger btn-sm" onclick="eliminarDelCarrito(${index})">X</button></td>
+                <td>${item.nombre} (${item.cantidad})</td>
+                <td>${subtotal.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</td>
+                <td>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="modificarCantidad(${index}, -1)">-</button>
+                    <span>${item.cantidad}</span>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="modificarCantidad(${index}, 1)">+</button>
+                    <button class="btn btn-danger btn-sm" onclick="eliminarDelCarrito(${index})">X</button>
+                </td>
             `;
             listaCarrito.appendChild(tr);
         });
+        
         totalCarrito.innerText = total.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' });
-        contadorCarrito.innerText = carrito.length;
+        contadorCarrito.innerText = cantidadTotal;
     }
 }
 
-//busqueda en pagina de productos 
-const filtroProductos = document.getElementById("filtroProductos");
-if (filtroProductos) {
-    filtroProductos.addEventListener("input", (e) => {
-        const productosFiltrados = productos.filter(producto => {
-            return producto.nombre.toLowerCase().includes(e.target.value.toLowerCase())
-        });
-        mostrarProductos(productosFiltrados);
-    })
+function modificarCantidad(index, cambio) {
+    var item = carrito[index];
+    var producto = productos.find(function(p) { return p.id === item.id; });
+    
+    var nuevaCantidad = item.cantidad + cambio;
+    
+    if (nuevaCantidad < 1) {
+        eliminarDelCarrito(index);
+        return;
+    }
+    
+    if (nuevaCantidad > producto.stock) {
+        alert('No hay suficiente stock disponible');
+        return;
+    }
+    
+    item.cantidad = nuevaCantidad;
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    actualizarCarrito();
 }
 
 function eliminarDelCarrito(index) {
@@ -140,84 +191,144 @@ function eliminarDelCarrito(index) {
     localStorage.setItem("carrito", JSON.stringify(carrito));
     actualizarCarrito();
 }
-const vaciarCarritoBtn = document.getElementById("vaciarCarrito");
-if (vaciarCarritoBtn) {
-    vaciarCarritoBtn.addEventListener("click", () => {
-        carrito = [];
-        localStorage.removeItem("carrito");
-        actualizarCarrito();
-    });
+
+function vaciarCarrito() {
+    carrito = [];
+    localStorage.removeItem("carrito");
+    actualizarCarrito();
 }
 
 function comprarCarrito() {
-    if (carrito.length > 0) {
-        alert("¡Tu compra se ha realizado con éxito! 🎉");
-
-        carrito = [];
-        localStorage.removeItem("carrito");
-
-        actualizarCarrito();
-    } else {
+    if (carrito.length === 0) {
         alert("Tu carrito está vacío. Agrega productos antes de comprar.");
+        return;
     }
-}
-
-const comprarCarritoBtn = document.getElementById("comprarCarrito");
-if (comprarCarritoBtn) {
-    comprarCarritoBtn.addEventListener("click", comprarCarrito);
-}
-
-const btnCarrito = document.getElementById("btnCarrito");
-if (btnCarrito) {
-    const offcanvascarrito = new bootstrap.Offcanvas(document.getElementById("offcanvasCarrito"));
-    btnCarrito.addEventListener("click", () => {
-        offcanvascarrito.toggle();
-    });
-}
-
-function manejarFormulario(e) {
-    e.preventDefault();
-
-    // Obtener todos los campos del formulario
-    const campos = e.target.querySelectorAll('input, textarea');
-    let camposVacios = false;
-
-    // Verificar que todos los campos estén llenos
-    campos.forEach(campo => {
-        if (!campo.value.trim()) {
-            camposVacios = true;
-            campo.classList.add('error');
-        } else {
-            campo.classList.remove('error');
+    
+    // Verificar stock antes de comprar
+    var sinStock = [];
+    
+    carrito.forEach(function(item) {
+        var producto = productos.find(function(p) { return p.id === item.id; });
+        if (producto.stock < item.cantidad) {
+            sinStock.push(item.nombre);
         }
     });
-
-    if (camposVacios) {
-        alert('Por favor, complete todos los campos del formulario');
-    } else {
-        alert('Mensaje enviado exitosamente! 📨');
-        // Limpiar el formulario
-        e.target.reset();
+    
+    if (sinStock.length > 0) {
+        alert("Los siguientes productos no tienen suficiente stock: " + sinStock.join(", "));
+        return;
     }
+    
+    // Actualizar stock
+    carrito.forEach(function(item) {
+        var producto = productos.find(function(p) { return p.id === item.id; });
+        producto.stock -= item.cantidad;
+        
+        // Notificar si el producto quedó sin stock
+        if (producto.stock <= 0) {
+            alert('El producto ' + producto.nombre + ' se ha agotado. Se notificará al responsable.');
+            // Simular envío de correo
+            console.log('Correo enviado al responsable: Producto ' + producto.nombre + ' agotado');
+        }
+    });
+    
+    // Guardar cambios en productos (simulado, en un caso real haríamos una petición al servidor)
+    alert("¡Compra realizada con éxito! Stock actualizado.");
+    
+    // Vaciar carrito
+    carrito = [];
+    localStorage.removeItem("carrito");
+    actualizarCarrito();
+    
+    // Recargar productos para mostrar nuevos stocks
+    mostrarProductosSegunPagina();
 }
 
-const formContacto = document.getElementById('formContacto');
-if (formContacto) {
-    formContacto.addEventListener('submit', manejarFormulario);
+// Búsqueda de productos
+var filtroProductos = document.getElementById("filtroProductos");
+if (filtroProductos) {
+    filtroProductos.addEventListener("input", function(e) {
+        var termino = e.target.value.toLowerCase();
+        var productosFiltrados = productos.filter(function(producto) {
+            return producto.nombre.toLowerCase().includes(termino) || 
+                   producto.descripcion.toLowerCase().includes(termino);
+        });
+        mostrarProductos(productosFiltrados);
+    });
 }
 
-cargarCarritoDesdeLocalStorage();
-
-
-//animacion img quienes somos
-document.addEventListener('DOMContentLoaded', function () {
-    const image = document.querySelector('.hover-animate');
-
-    image.addEventListener('mouseenter', function () {
-        this.classList.add('animate__animated', 'animate__pulse');
-    });
-
-    image.addEventListener('animationend', function () {
-        this.classList.remove('animate__animated', 'animate__pulse');
-    });
+// Inicialización
+document.addEventListener("DOMContentLoaded", function() {
+    cargarProductos();
+    cargarCarritoDesdeLocalStorage();
+    
+    // Configurar botones del carrito
+    var vaciarCarritoBtn = document.getElementById("vaciarCarrito");
+    if (vaciarCarritoBtn) {
+        vaciarCarritoBtn.addEventListener("click", vaciarCarrito);
+    }
+    
+    var comprarCarritoBtn = document.getElementById("comprarCarrito");
+    if (comprarCarritoBtn) {
+        comprarCarritoBtn.addEventListener("click", comprarCarrito);
+    }
+    
+    var btnCarrito = document.getElementById("btnCarrito");
+    if (btnCarrito) {
+        var offcanvascarrito = new bootstrap.Offcanvas(document.getElementById("offcanvasCarrito"));
+        btnCarrito.addEventListener("click", function() {
+            offcanvascarrito.toggle();
+        });
+    }
+    
+    // Configurar formulario de contacto
+    var formContacto = document.getElementById('formContacto');
+    if (formContacto) {
+        formContacto.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var campos = e.target.querySelectorAll('input, textarea');
+            var camposVacios = false;
+            
+            campos.forEach(function(campo) {
+                if (!campo.value.trim()) {
+                    camposVacios = true;
+                    campo.classList.add('error');
+                } else {
+                    campo.classList.remove('error');
+                }
+            });
+            
+            if (camposVacios) {
+                alert('Por favor, complete todos los campos del formulario');
+            } else {
+                alert('Mensaje enviado exitosamente! 📨');
+                e.target.reset();
+            }
+        });
+    }
+    
+    // Animación imagen quienes somos
+    var image = document.querySelector('.hover-animate');
+    if (image) {
+        image.addEventListener('mouseenter', function() {
+            this.classList.add('animate__animated', 'animate__pulse');
+        });
+        
+        image.addEventListener('animationend', function() {
+            this.classList.remove('animate__animated', 'animate__pulse');
+        });
+    }
+    
+    // Bienvenida
+    var bienvenida = document.getElementById("bienvenida");
+    if (bienvenida) {
+        if (localStorage.getItem("user")) {
+            var user = localStorage.getItem("user");
+            bienvenida.innerHTML = "Bienvenido " + user + " a nuestra tienda digital.";
+        } else {
+            var user = prompt("Ingrese su nombre y apellido");
+            bienvenida.innerHTML = "Bienvenido " + user + " a nuestra tienda digital.";
+            localStorage.setItem("user", user);
+        }
+    }
 });
