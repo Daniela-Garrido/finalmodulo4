@@ -6,7 +6,9 @@
       "descripcion": "Mouse inalámbrico con batería de color negro",
       "precio": 14990,
       "urlImagen": "./assets/img/M3.webp",
-      "stock": 3
+      "stock": 3,
+      "categoria": "Mouse",
+      "etiqueta": "inalámbrico"
     },
     {
       "id": 2,
@@ -14,7 +16,9 @@
       "descripcion": "Teclado mecánico, inalámbrico con luces RGB",
       "precio": 25000,
       "urlImagen": "./assets/img/T1.webp",
-      "stock": 2
+      "stock": 2,
+      "categoria": "Teclado",
+      "etiqueta": "gamer"
     },
     {
       "id": 3,
@@ -22,7 +26,9 @@
       "descripcion": "Monitor 4K 27 pulgadas",
       "precio": 120000,
       "urlImagen": "./assets/img/MT1.webp",
-      "stock": 5
+      "stock": 5,
+      "categoria": "Monitor",
+      "etiqueta": "4K"
     },
     {
       "id": 4,
@@ -30,7 +36,9 @@
       "descripcion": "Auriculares inalámbricos con cancelación de ruido",
       "precio": 22990,
       "urlImagen": "./assets/img/A1.webp",
-      "stock": 12
+      "stock": 12,
+      "categoria": "Auriculares",
+      "etiqueta": "inalámbrico"
     },
     {
       "id": 5,
@@ -38,7 +46,9 @@
       "descripcion": "Mouse inalámbrico con batería de color negro",
       "precio": 20990,
       "urlImagen": "./assets/img/M1.webp",
-      "stock": 20
+      "stock": 20,
+      "categoria": "Mouse",
+      "etiqueta": "oficina"
     },
     {
       "id": 6,
@@ -46,7 +56,9 @@
       "descripcion": "Teclado mecánico, inalámbrico con luces RGB",
       "precio": 30000,
       "urlImagen": "./assets/img/T2.webp",
-      "stock": 6
+      "stock": 6,
+      "categoria": "Teclado",
+      "etiqueta": "gamer"
     },
     {
       "id": 7,
@@ -54,7 +66,9 @@
       "descripcion": "Monitor 4K 27 pulgadas",
       "precio": 12000,
       "urlImagen": "./assets/img/MT2.webp",
-      "stock": 3
+      "stock": 3,
+      "categoria": "Monitor",
+      "etiqueta": "4K"
     },
     {
       "id": 8,
@@ -62,7 +76,9 @@
       "descripcion": "Auriculares inalámbricos con cancelación de ruido",
       "precio": 45990,
       "urlImagen": "./assets/img/A4.webp",
-      "stock": 7
+      "stock": 7,
+      "categoria": "Auriculares",
+      "etiqueta": "inalámbrico"
     },
     {
       "id": 9,
@@ -70,7 +86,9 @@
       "descripcion": "Audífonos Bluetooth, color azul",
       "precio": 18990,
       "urlImagen": "assets/img/Audif_01_D06621.png",
-      "stock": 18
+      "stock": 18,
+      "categoria": "Auriculares",
+      "etiqueta": "inalámbrico"
     },
     {
       "id": 10,
@@ -78,7 +96,9 @@
       "descripcion": "Audífono inalámbrico estéreo, color negro",
       "precio": 50000,
       "urlImagen": "assets/img/Audif_02_D08529.png",
-      "stock": 10
+      "stock": 10,
+      "categoria": "Auriculares",
+      "etiqueta": "inalámbrico"
     },
     {
       "id": 11,
@@ -86,7 +106,9 @@
       "descripcion": "Audífonos alámbricos, color acero",
       "precio": 25000,
       "urlImagen": "assets/img/Audif_03_D04355.png",
-      "stock": 14
+      "stock": 14,
+      "categoria": "Auriculares",
+      "etiqueta": "alámbrico"
     },
     {
       "id": 12,
@@ -94,7 +116,9 @@
       "descripcion": "Teclado USB, color negro",
       "precio": 15000,
       "urlImagen": "assets/img/Tecl_01_D05411.png",
-      "stock": 9
+      "stock": 9,
+      "categoria": "Teclado",
+      "etiqueta": "oficina"
     },
     {
       "id": 13,
@@ -102,7 +126,9 @@
       "descripcion": "Teclado gaming, retroiluminado",
       "precio": 25000,
       "urlImagen": "assets/img/Tecl_02_D04377.png",
-      "stock": 11
+      "stock": 11,
+      "categoria": "Teclado",
+      "etiqueta": "gamer"
     },
     {
       "id": 14,
@@ -110,7 +136,9 @@
       "descripcion": "Teclado Bluetooth, color negro",
       "precio": 35000,
       "urlImagen": "assets/img/Tecl_03_D05751.png",
-      "stock": 4
+      "stock": 4,
+      "categoria": "Teclado",
+      "etiqueta": "inalámbrico"
     },
     {
       "id": 15,
@@ -118,7 +146,9 @@
       "descripcion": "Mouse inalámbrico, color azul",
       "precio": 15000,
       "urlImagen": "./assets/img/M4.webp",
-      "stock": 22
+      "stock": 22,
+      "categoria": "Mouse",
+      "etiqueta": "oficina"
     }
   ]
 }
