@@ -26,7 +26,7 @@ class CarritoItem {
     }
 }
 
-// Cargar productos desde el JSON
+/* Cargar productos desde el JSON
 const cargarProductos = async () => {
     try {
         const response = await fetch('./productos.json');
@@ -35,6 +35,37 @@ const cargarProductos = async () => {
         }
         const data = await response.json();
         productos = data.productos.map(p => new Producto(p.id, p.nombre, p.descripcion, p.precio, p.urlImagen, p.stock, p.categoria, p.etiqueta));
+        mostrarProductosSegunPagina();
+    } catch (error) {
+        console.error('Error cargando o procesando los productos:', error);
+    }
+}; SE CAMBIA POR EL CODIGO DE ABAJO */
+
+const cargarProductos = async () => {
+    try {
+        // Primero intentar cargar desde localStorage
+        const productosGuardados = localStorage.getItem('productos');
+        if (productosGuardados) {
+            productos = JSON.parse(productosGuardados).map(p => new Producto(
+                p.id, p.nombre, p.descripcion, p.precio, p.urlImagen,
+                p.stock, p.categoria, p.etiqueta
+            ));
+            mostrarProductosSegunPagina();
+            return;
+        }
+
+        // Si no hay en localStorage, cargar desde JSON
+        const response = await fetch('./productos.json');
+        if (!response.ok) throw new Error('Error al cargar los productos');
+
+        const data = await response.json();
+        productos = data.productos.map(p => new Producto(
+            p.id, p.nombre, p.descripcion, p.precio, p.urlImagen,
+            p.stock, p.categoria, p.etiqueta
+        ));
+
+        // Guardar en localStorage para futuras cargas
+        localStorage.setItem('productos', JSON.stringify(productos));
         mostrarProductosSegunPagina();
     } catch (error) {
         console.error('Error cargando o procesando los productos:', error);
@@ -241,6 +272,62 @@ const comprarCarrito = () => {
     mostrarProductosSegunPagina();
 };
 
+
+
+/*const filtrarProductos = (criterios) => {
+  const terminoBusqueda = criterios.textoLibre?.toLowerCase() || '';
+  
+  return productos.filter(producto => {
+    // Filtro por texto libre (busca en nombre, descripción, categoría y etiqueta)
+    const coincideTexto = !terminoBusqueda || 
+      producto.nombre.toLowerCase().includes(terminoBusqueda) ||
+      producto.descripcion.toLowerCase().includes(terminoBusqueda) ||
+      producto.categoria.toLowerCase().includes(terminoBusqueda) ||
+      producto.etiqueta.toLowerCase().includes(terminoBusqueda);
+    
+    // Filtro por categoría
+    const coincideCategoria = !criterios.categoria || 
+      producto.categoria === criterios.categoria;
+    
+    // Filtro por precio
+    const precioMin = criterios.precioMin || 0;
+    const precioMax = criterios.precioMax || Infinity;
+    const coincidePrecio = producto.precio >= precioMin && producto.precio <= precioMax;
+    
+    return coincideTexto && coincideCategoria && coincidePrecio;
+  });
+};*/
+
+/*Ventajas de la Versión Mejorada
+a. Lógica más Clara
+La versión mejorada separa claramente cada condición de filtrado en variables descriptivas (coincideTexto, coincideCategoria, coincidePrecio).
+
+Elimina la variable coincide que se iba modificando secuencialmente, lo que puede ser confuso.
+
+b. Operadores Nullish y Valores por Defecto
+Usa el operador ?. para manejar casos donde textoLibre podría ser null o undefined.
+
+Establece valores por defecto (|| '' y || Infinity) que simplifican las comparaciones.
+
+c. Evaluación Más Eficiente
+La versión original evalúa todas las condiciones incluso cuando coincide ya es false.
+
+La versión mejorada evalúa cada condición independientemente y las combina al final, lo que puede ser más eficiente en algunos casos.
+
+d. Búsqueda en Más Campos
+La versión mejorada busca el texto libre también en la categoría (además de nombre, descripción y etiqueta), lo que hace las búsquedas más completas.
+
+e. Retorno Directo del Resultado
+La versión mejorada retorna directamente el array filtrado, dejando la función mostrarProductos fuera, lo que sigue mejor el principio de responsabilidad única.
+
+f. Manejo de Case Sensitivity Consistente
+Todas las comparaciones de texto se hacen en minúsculas de manera consistente.
+
+g. Mejor Manejo de Límites de Precio
+Usa Infinity como valor por defecto para el precio máximo, lo que evita tener que hacer comprobaciones adicionales.*/
+
+
+
 // Búsqueda y Filtrado de productos
 const filtrarProductos = (criterios) => {
     const productosFiltrados = productos.filter(producto => {
@@ -307,7 +394,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (filtroTextoLibre) {
         filtroTextoLibre.addEventListener("input", aplicarFiltros);
     }
-    
+
     // Configurar botones del carrito
     const vaciarCarritoBtn = document.getElementById("vaciarCarrito");
     if (vaciarCarritoBtn) {
