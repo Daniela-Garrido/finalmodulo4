@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,9 +10,7 @@
   <title>Tecno Chile</title>
   <link rel="icon" type="image/svg+xml" href="assets/img/angellist-svgrepo-com.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
-
 </head>
-
 <body>
   <header id="inicio" class="fixed-top">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -47,34 +44,31 @@
       </div>
     </nav>
   </header>
-
-  <!-- off canvas barra lateral-->
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCarrito" aria-labelledby="offcanvasRightLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasRightLabel">Carrito de Compras</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Producto</th>
-          <th>Precio</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody id="listaCarrito">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasRightLabel">Carrito de Compras</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="listaCarrito">
         </tbody>
-    </table>
-    <h5>Total: <span id="totalCarrito">$0.00</span></h5>
-    <div class="carrito-acciones d-flex justify-content-between align-items-center mt-3">
-      <button id="vaciarCarrito" class="btn btn-danger">Vaciar Carrito</button>
-      <button id="comprarCarrito" class="btn btn-success">Comprar</button>
+      </table>
+      <h5>Total: <span id="totalCarrito">$0.00</span></h5>
+      <div class="carrito-acciones d-flex justify-content-between align-items-center mt-3">
+        <button id="vaciarCarrito" class="btn btn-danger">Vaciar Carrito</button>
+        <button id="comprarCarrito" class="btn btn-success">Comprar</button>
+      </div>
     </div>
   </div>
-</div>
-    <!-- carrusel-->
   <main>
     <div id="carouselExampleCaptions" class="carousel slide">
       <div class="carousel-indicators">
@@ -82,10 +76,9 @@
           aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
           aria-label="Slide 2"></button>
-
       </div>
-      <div class="carousel-inner" style="height:500px;"> <!-- Altura fija para el contenedor -->
-        <div class="carousel-item active h-100"> <!-- h-100 para que ocupe todo el alto -->
+      <div class="carousel-inner" style="height:500px;">
+        <div class="carousel-item active h-100">
           <img src="./assets/img/carousel-1.jpg" class="d-block w-100 h-100 object-fit-cover" alt="...">
           <div class="carousel-caption d-none d-md-block">
             <h4>Bienvenidos a Tecno Chile </h4>
@@ -111,19 +104,26 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-
-
     <div class="container mt-4">
       <h2 class="text-center">Búsqueda de productos</h2>
-      <div class="d-flex justify-content-center">
-        <input type="text" id="filtroProductos" class="form-control w-50" placeholder="Buscar productos...">
+      <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
+        <input type="text" id="filtroTextoLibre" class="form-control w-100 w-md-50" placeholder="Buscar por nombre, descripción, o etiqueta...">
+        <select id="filtroCategoria" class="form-select w-100 w-md-25">
+          <option value="">Todas las categorías</option>
+          <option value="Mouse">Mouse</option>
+          <option value="Teclado">Teclado</option>
+          <option value="Monitor">Monitor</option>
+          <option value="Auriculares">Auriculares</option>
+        </select>
+        <div class="d-flex w-100 w-md-25 gap-2">
+          <input type="number" id="filtroPrecioMin" class="form-control" placeholder="Precio Min">
+          <input type="number" id="filtroPrecioMax" class="form-control" placeholder="Precio Max">
+        </div>
+        <button id="botonBuscar" class="btn btn-primary w-100 w-md-auto">Buscar</button>
       </div>
     </div>
-    <!-- Sección de productos -->
     <section class="d-flex my-5 col col-lg-12" id="productos-contenedor"></section>
   </main>
-
-  <!-- footer -->
   <footer class="mt-auto ">
     <div class="container">
       <div class="row">
@@ -161,8 +161,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Botón flotante de WhatsApp -->
     <a href="https://wa.me/569" class="whatsapp-btn" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp"
       style="position: fixed !important; bottom: 30px !important; right: 30px !important; left: auto !important; width: 60px !important; height: 60px !important; background: #25D366 !important; color: white !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; text-decoration: none !important; box-shadow: 0 4px 16px rgba(4, 168, 64, 0.925) !important; z-index: 9999 !important; transition: all 0.3s ease !important;">
       <svg viewBox="0 0 24 24" width="32" height="32" fill="white"
@@ -172,7 +170,6 @@
       </svg>
     </a>
   </footer>
-
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
     crossorigin="anonymous"></script>
@@ -180,7 +177,5 @@
     integrity="sha384-7qAoOXltbVP82dhxHAUje59V5r2YsVfBafyUDxEdApLPmcdhBPg1DKg1ERo0BZlK"
     crossorigin="anonymous"></script>
   <script src="./assets/js/script.js"></script>
-
 </body>
-
 </html>
