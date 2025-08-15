@@ -273,8 +273,7 @@ const comprarCarrito = () => {
 };
 
 
-
-/*const filtrarProductos = (criterios) => {
+const filtrarProductos = (criterios) => {
   const terminoBusqueda = criterios.textoLibre?.toLowerCase() || '';
   
   return productos.filter(producto => {
@@ -296,7 +295,7 @@ const comprarCarrito = () => {
     
     return coincideTexto && coincideCategoria && coincidePrecio;
   });
-};*/
+};
 
 /*Ventajas de la Versión Mejorada
 a. Lógica más Clara
@@ -328,39 +327,39 @@ Usa Infinity como valor por defecto para el precio máximo, lo que evita tener q
 
 
 
-// Búsqueda y Filtrado de productos
-const filtrarProductos = (criterios) => {
-    const productosFiltrados = productos.filter(producto => {
-        let coincide = true;
+// // Búsqueda y Filtrado de productos
+// const filtrarProductos = (criterios) => {
+//     const productosFiltrados = productos.filter(producto => {
+//         let coincide = true;
 
-        // Filtro por Texto Libre (Nombre, Descripción, Etiqueta)
-        if (criterios.textoLibre) {
-            const termino = criterios.textoLibre.toLowerCase();
-            coincide = coincide && (
-                producto.nombre.toLowerCase().includes(termino) ||
-                producto.descripcion.toLowerCase().includes(termino) ||
-                (producto.etiqueta && producto.etiqueta.toLowerCase().includes(termino))
-            );
-        }
+//         // Filtro por Texto Libre (Nombre, Descripción, Etiqueta)
+//         if (criterios.textoLibre) {
+//             const termino = criterios.textoLibre.toLowerCase();
+//             coincide = coincide && (
+//                 producto.nombre.toLowerCase().includes(termino) ||
+//                 producto.descripcion.toLowerCase().includes(termino) ||
+//                 (producto.etiqueta && producto.etiqueta.toLowerCase().includes(termino))
+//             );
+//         }
 
-        // Filtro por Categoría
-        if (criterios.categoria) {
-            coincide = coincide && producto.categoria && producto.categoria.toLowerCase() === criterios.categoria.toLowerCase();
-        }
+//         // Filtro por Categoría
+//         if (criterios.categoria) {
+//             coincide = coincide && producto.categoria && producto.categoria.toLowerCase() === criterios.categoria.toLowerCase();
+//         }
 
-        // Filtro por Precio
-        if (criterios.precioMin) {
-            coincide = coincide && producto.precio >= criterios.precioMin;
-        }
-        if (criterios.precioMax) {
-            coincide = coincide && producto.precio <= criterios.precioMax;
-        }
+//         // Filtro por Precio
+//         if (criterios.precioMin) {
+//             coincide = coincide && producto.precio >= criterios.precioMin;
+//         }
+//         if (criterios.precioMax) {
+//             coincide = coincide && producto.precio <= criterios.precioMax;
+//         }
 
-        return coincide;
-    });
+//         return coincide;
+//     });
 
-    mostrarProductos(productosFiltrados);
-};
+//     mostrarProductos(productosFiltrados);
+// };
 
 // Inicialización
 document.addEventListener("DOMContentLoaded", () => {
