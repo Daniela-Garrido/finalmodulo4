@@ -5,7 +5,7 @@
 - Daniela Garrido Olivares
 - Gonzalo Román Reyes
 
-## Repositorio: 
+## Repositorio: https://github.com/Daniela-Garrido/finalmodulo4/tree/M5AE4-ABPRO3
 
 ## Descripción del Proyecto: 
 "Tecno Chile" es una aplicación web para la gestión de productos e inventario de una tienda de tecnología. Se ha desarrollado para migrar una base de código de JavaScript ES5 a ES6 y para implementar un sistema CRUD (Crear, Leer, Actualizar, Eliminar) interactuando con una API.
