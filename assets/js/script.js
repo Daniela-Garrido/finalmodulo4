@@ -220,6 +220,9 @@ const mostrarProductos = (listaProductos) => {
                     ${producto.precio.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}
                 </p>
                 ${botonAgregar}
+                <button type="button" class="btn btn-secondary btn-sm mt-2" onclick="mostrarDetallesConXHR(${producto.id})">
+                    Más detalles (XHR)
+                </button>
             </div>`;
         contenedor.appendChild(card);
     });
@@ -450,3 +453,26 @@ const filtrarProductos = (criterios) => {
         return coincideTexto && coincideCategoria && coincidePrecio;
     });
 };
+
+// NUEVA FUNCIÓN PARA DEMOSTRAR EL USO DE XHR
+function mostrarDetallesConXHR(productoId) {
+    const xhr = new XMLHttpRequest();
+    const url = `http://localhost:3000/api/productos/${productoId}`;
+
+    // Define qué hacer cuando la petición se completa
+    xhr.onreadystatechange = function() {
+        if (this.readyState === 4) { // La petición ha terminado
+            if (this.status === 200) { // La petición fue exitosa
+                const productoDetalles = JSON.parse(this.responseText);
+                alert(`Detalles del Producto (${productoDetalles.nombre}):\nDescripción completa: ${productoDetalles.descripcion}\nCategoría: ${productoDetalles.categoria}`);
+            } else { // Ocurrió un error
+                console.error('Error al obtener detalles con XHR:', this.status, this.statusText);
+                alert('No se pudo cargar la información adicional del producto.');
+            }
+        }
+    };
+
+    // Prepara y envía la petición GET
+    xhr.open('GET', url, true);
+    xhr.send();
+}
