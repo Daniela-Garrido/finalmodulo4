@@ -1,4 +1,4 @@
-# Proyecto Tecno Chile MOD5 - ABPRO3
+# Proyecto Tecno Chile M5AE5 - ABPRO4
 
 ## Integrantes del Equipo
 - María Teresa de la Fuente
@@ -7,7 +7,13 @@
 
 ## Repositorio: https://github.com/Daniela-Garrido/finalmodulo4/tree/M5AE5-ABPRO4
 
-## Descripción del Proyecto: 
+### Aprendizaje Esperado
+Utilizar el objeto XHR y la API Fetch para el consumo de una API
+externa y su procesamiento acorde al lenguaje Javascript
+
+--- 
+
+### Descripción del Proyecto: 
 Tu proyecto, "Tecno Chile", es una tienda digital que cumple con los requisitos del ABPRO4 al integrar y comparar dos tecnologías de comunicación HTTP: Fetch y XMLHttpRequest (XHR).
 
 A continuación, se detalla cómo cada requisito ha sido implementado y documentado en el código:
