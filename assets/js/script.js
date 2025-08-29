@@ -27,7 +27,7 @@ class CarritoItem {
 }
 
 // Cargar productos desde la API y usar localStorage como respaldo
-const cargarProductos = async () => {
+/*const cargarProductos = async () => {
     try {
         const response = await fetch('http://localhost:3000/api/productos');
         
@@ -66,12 +66,102 @@ const cargarProductos = async () => {
     }
     
     mostrarProductosSegunPagina();
+};*/
+
+// Constantes para URLs y mensajes
+const API_URL = 'http://localhost:3000/api/productos';
+const ERROR_MESSAGES = {
+    API_FAILED: 'La API no respondió correctamente.',
+    LOAD_FAILED: 'No se pudieron cargar los productos. Por favor, intente más tarde.',
+    FALLBACK_LOCAL: 'Intentando cargar productos desde el almacenamiento local...',
+    LOCAL_LOADED: 'Productos cargados desde el almacenamiento local.',
+    API_LOADED: 'Productos cargados con éxito desde la API.'
 };
+
+// Función para verificar respuesta de la API
+const verificarRespuesta = (response) => {
+    if (!response.ok) {
+        throw new Error(ERROR_MESSAGES.API_FAILED);
+    }
+    return response;
+};
+
+// Función para mapear datos de producto
+const mapearProducto = (datosProducto) => {
+    return new Producto(
+        datosProducto.id,
+        datosProducto.nombre,
+        datosProducto.descripcion,
+        datosProducto.precio,
+        datosProducto.imagen || datosProducto.urlImagen,
+        datosProducto.stock,
+        datosProducto.categoria,
+        datosProducto.etiqueta
+    );
+};
+
+// Función para cargar desde localStorage
+const cargarDesdeLocalStorage = () => {
+    console.log(ERROR_MESSAGES.FALLBACK_LOCAL);
+    const productosEnLocalStorage = localStorage.getItem('productos');
+
+    if (!productosEnLocalStorage) {
+        return null;
+    }
+
+    try {
+        const productosParseados = JSON.parse(productosEnLocalStorage);
+        return productosParseados.map(p => mapearProducto(p));
+    } catch (error) {
+        console.error('Error al parsear productos desde localStorage:', error);
+        return null;
+    }
+};
+
+// Función para mostrar error en la UI
+const mostrarError = (mensaje) => {
+    const contenedor = document.getElementById("productos-contenedor");
+    if (contenedor) {
+        contenedor.innerHTML = `<p class="text-danger text-center mt-5">${mensaje}</p>`;
+    }
+};
+
+// Función principal 
+const cargarProductos = async () => {
+    try {
+        // Intentar cargar desde API
+        const response = await fetch(API_URL);
+        const data = await verificarRespuesta(response).json();
+
+        productos = data.map(mapearProducto);
+        localStorage.setItem('productos', JSON.stringify(productos));
+
+        console.log(ERROR_MESSAGES.API_LOADED);
+
+    } catch (error) {
+        console.error('Error al cargar productos desde la API:', error);
+
+        // Fallback a localStorage
+        const productosLocales = cargarDesdeLocalStorage();
+
+        if (productosLocales) {
+            productos = productosLocales;
+            console.log(ERROR_MESSAGES.LOCAL_LOADED);
+        } else {
+            console.warn('No hay productos disponibles ni en la API ni en el almacenamiento local.');
+            mostrarError(ERROR_MESSAGES.LOAD_FAILED);
+            return; // Salir early si no hay productos
+        }
+    }
+
+    mostrarProductosSegunPagina();
+};
+
 
 document.addEventListener("DOMContentLoaded", () => {
     cargarProductos();
     cargarCarritoDesdeLocalStorage();
-    
+
     // Configurar botones del carrito
     const vaciarCarritoBtn = document.getElementById("vaciarCarrito");
     if (vaciarCarritoBtn) {
@@ -370,15 +460,15 @@ const comprarCarrito = async () => {
         }
 
         alert("¡Compra realizada con éxito! Stock actualizado en el servidor.");
-        
+
         // Vaciar el carrito después de una compra exitosa
         carrito = [];
         localStorage.removeItem("carrito");
         actualizarCarrito();
-        
+
         // Volver a cargar los productos desde el servidor para reflejar los cambios
         await cargarProductos();
-        
+
     } catch (error) {
         console.error('Error durante la compra:', error);
         alert(error.message);
@@ -411,13 +501,13 @@ const actualizarStockEnServidor = async (productoId, cantidadComprada) => {
         if (index !== -1) {
             productos[index].stock = productoActualizado.stock;
         }
-        
+
         if (productoActualizado.stock <= 0) {
             await notificarResponsable(productoActualizado.nombre);
         }
 
         return productoActualizado;
-        
+
     } catch (error) {
         console.error('Error al actualizar el stock:', error);
         throw error;
@@ -435,21 +525,21 @@ const notificarResponsable = async (nombreProducto) => {
 
 const filtrarProductos = (criterios) => {
     const terminoBusqueda = criterios.textoLibre?.toLowerCase() || '';
-  
+
     return productos.filter(producto => {
-        const coincideTexto = !terminoBusqueda || 
+        const coincideTexto = !terminoBusqueda ||
             producto.nombre.toLowerCase().includes(terminoBusqueda) ||
             producto.descripcion.toLowerCase().includes(terminoBusqueda) ||
             producto.categoria.toLowerCase().includes(terminoBusqueda) ||
             producto.etiqueta.toLowerCase().includes(terminoBusqueda);
-    
-        const coincideCategoria = !criterios.categoria || 
+
+        const coincideCategoria = !criterios.categoria ||
             producto.categoria === criterios.categoria;
-    
+
         const precioMin = criterios.precioMin || 0;
         const precioMax = criterios.precioMax || Infinity;
         const coincidePrecio = producto.precio >= precioMin && producto.precio <= precioMax;
-    
+
         return coincideTexto && coincideCategoria && coincidePrecio;
     });
 };
@@ -460,7 +550,7 @@ function mostrarDetallesConXHR(productoId) {
     const url = `http://localhost:3000/api/productos/${productoId}`;
 
     // Define qué hacer cuando la petición se completa
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
         if (this.readyState === 4) { // La petición ha terminado
             if (this.status === 200) { // La petición fue exitosa
                 const productoDetalles = JSON.parse(this.responseText);
